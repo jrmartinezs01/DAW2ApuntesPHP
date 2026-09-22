@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Código mezclado</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 900px; margin: 2rem auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: .7rem; text-align: left; }
+        th { background: #eee; }
+        .agotado { color: #b00020; font-weight: bold; }
+        .disponible { color: #176b2c; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Catálogo de productos</h1>
+
+    <p> Hay <?= $totalProductos ?> productos, de los cuales <?= $productosDisponibles ?> están disponibles.</p>
+
+</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Estado</th>
+                <th>Precio final</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($productos as $producto): ?>
+                <tr>
+                    <td><?= htmlspecialchars($producto['nombre']) ?></td>
+                    <td><?= number_format($producto['precio'], 2, ',', '.') ?> €</td>
+                    <td><?= $producto['stock'] ?></td>
+                    <td><?= estaDisponible($producto['stock']) ?></td>
+                    <td><?= descuento($producto['precio']) ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <p>
+        Valor total del stock:
+        <strong> <?= number_format($totalValorStock, 2, ',', '.') . ' €' ?> </strong>
+    </p>
+</body>
+</html>
